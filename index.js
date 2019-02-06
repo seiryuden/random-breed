@@ -12,8 +12,8 @@ function getImages(inputText){
 }
 
 function displayImages(responseJson){
-    console.log("displayImages ran");
     console.log(responseJson);
+    console.log("displayImages ran");
     
     if (responseJson.status == "success"){
 
@@ -23,24 +23,25 @@ function displayImages(responseJson){
         counter.count = 0;
 
     } else if (responseJson.status == "error" && counter.count == 0){
-        console.log("dasher ran");
+        console.log("trying inserting dash in the middle");
         let splitInput = document.getElementById("input-text").value.split(" ");
         let dashedInput= splitInput.join("-");
+        console.log(`searching for ${dashedInput}`);
         getImages(dashedInput);
-        console.log(dashedInput);
+        
         counter.count++;
         console.log(counter);
 
     } else if (responseJson.status == "error" && counter.count == 1){
-        console.log("reverser ran");
+        console.log("trying reversing word order");
         let splitInput = document.getElementById("input-text").value.split(" ");
         let reorderedInput= splitInput.reverse().join("-");
+        console.log(`searching for ${reorderedInput}`);
         getImages(reorderedInput);
-        console.log(reorderedInput);
         counter.count++;
 
     } else {
-        console.log("error messager ran");
+        console.log("breed not found message");
         $(".displayed-content").replaceWith(`<h3 class="displayed-content">${responseJson.message}</h3>`);
         $(".images-section").removeClass("js-hidden");
         counter.count = 0;
